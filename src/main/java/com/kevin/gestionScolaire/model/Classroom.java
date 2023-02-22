@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -20,30 +21,46 @@ import lombok.RequiredArgsConstructor;
 @Entity
 @Data
 @NoArgsConstructor
-@RequiredArgsConstructor
 public class Classroom {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@NonNull
 	private String name;
 	
-	@NonNull
-	private String color;
+	private int capacity;
+	
 	
 	@JsonIgnoreProperties
-	@ManyToMany(cascade = CascadeType.REMOVE)
+	@ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
 	private List<Subject> excludedSubjects;
 	
 	@JsonIgnoreProperties
-	@OneToMany(mappedBy = "classroom",cascade = CascadeType.REMOVE)
+	@OneToMany(mappedBy = "classroom",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
 	private List<Subject> subjects;
 	
 	@JsonIgnoreProperties
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	private Institution institution;
+
+	public Classroom(String name, int capacity, List<Subject> excludedSubjects, List<Subject> subjects,
+			Institution institution) {
+		super();
+		this.name = name;
+		this.capacity = capacity;
+		this.excludedSubjects = excludedSubjects;
+		this.subjects = subjects;
+		this.institution = institution;
+	}
+
+	public Classroom(String name, int capacity) {
+		super();
+		this.name = name;
+		this.capacity = capacity;
+	}
+
+	
 	
 	
 

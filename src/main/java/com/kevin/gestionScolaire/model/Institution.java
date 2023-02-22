@@ -22,6 +22,18 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class Institution {
 
+	public Institution(String name, String adresse, Type type, List<Teacher> teachers,
+			List<GroupClass> groupClasses, List<Classroom> classrooms, List<Subject> subjects) {
+		this.name=name;
+		this.adresse=adresse;
+		this.type=type;
+		this.teachers=teachers;
+		this.groupClasses=groupClasses;
+		this.classrooms=classrooms;
+		this.subjects=subjects;
+		// TODO Auto-generated constructor stub
+	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -40,19 +52,19 @@ public class Institution {
 	private String logo;
 	
 	@JsonIgnoreProperties
-	@OneToMany(mappedBy = "institution", cascade = CascadeType.REMOVE)
+	@OneToMany(mappedBy = "institution", cascade = CascadeType.ALL)
 	private List<Teacher> teachers;
 	
 	@JsonIgnoreProperties
-	@OneToMany(mappedBy = "institution", cascade = CascadeType.REMOVE)
+	@OneToMany(mappedBy = "institution", cascade = CascadeType.ALL)
 	private List<GroupClass> groupClasses;
 	
 	@JsonIgnoreProperties
-	@OneToMany(mappedBy = "institution", cascade = CascadeType.REMOVE)
+	@OneToMany(mappedBy = "institution", cascade = CascadeType.ALL)
 	private List<Classroom> classrooms;
 	
 	@JsonIgnoreProperties
-	@OneToMany(mappedBy = "institution", cascade = CascadeType.REMOVE)
+	@OneToMany(mappedBy = "institution", cascade = CascadeType.ALL)
 	private List<Subject> subjects;
 	
 	

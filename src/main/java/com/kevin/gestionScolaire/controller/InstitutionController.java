@@ -1,5 +1,6 @@
 package com.kevin.gestionScolaire.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,7 +31,19 @@ public class InstitutionController {
 	@GetMapping({"/home","", "/" })
 	public ResponseEntity<List<Institution>> findAll(@RequestParam(defaultValue = "0") int init) {
 		if (init == 1) {
-			this.dao.save(new Institution("College 1", "rue du pif", Type.COLLEGE));
+			Subject subject = new Subject("Mathématique","bg-primary");
+			Classroom classroom = new Classroom("A1",40);
+			List<Subject> subjects = new ArrayList<Subject>();
+			subjects.add(subject);
+			Teacher teacher = new Teacher("Bobby","Bob","01-06-1997",subjects);
+			GroupClass groupClass = new GroupClass("3E",teacher);
+			List<Teacher> teachers = new ArrayList<Teacher>();
+			teachers.add(teacher);
+			List<GroupClass> groupClasses = new ArrayList<GroupClass>();
+			groupClasses.add(groupClass);
+			List<Classroom> classrooms = new ArrayList<Classroom>();
+			classrooms.add(classroom);
+			this.dao.save(new Institution("College 1", "rue du pif", Type.COLLEGE,teachers,groupClasses,classrooms,subjects));
 		}
 		return new ResponseEntity<List<Institution>>(dao.findAll(), HttpStatus.OK);
 	}

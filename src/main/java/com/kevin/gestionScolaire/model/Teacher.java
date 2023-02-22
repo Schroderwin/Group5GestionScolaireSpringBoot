@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -21,31 +22,48 @@ import lombok.RequiredArgsConstructor;
 @Entity
 @Data
 @NoArgsConstructor
-@RequiredArgsConstructor
 public class Teacher {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@NonNull
 	private String firstName;
 	
-	@NonNull
 	private String lastName;
 	
-	@NonNull
 	private String birthDate;
 	
+
 	@JsonIgnoreProperties
-	@ManyToMany(cascade = CascadeType.REMOVE)
+	@ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
 	private List<Subject> subjects;
 	
+	@JsonIgnoreProperties
 	@OneToOne
 	private GroupClass groupClass;
 	
 	@JsonIgnoreProperties
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	private Institution institution;
+	
+	public Teacher(String firstName, String lastName, String birthDate, List<Subject> subjects, GroupClass groupClass,
+			Institution institution) {
+		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.birthDate = birthDate;
+		this.subjects = subjects;
+		this.groupClass = groupClass;
+		this.institution = institution;
+	}
+	
+	public Teacher(String firstName, String lastName, String birthDate, List<Subject> subjects) {
+		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.birthDate = birthDate;
+		this.subjects = subjects;
+	}
 
 }
