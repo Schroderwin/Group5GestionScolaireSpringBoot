@@ -33,15 +33,19 @@ public class Subject {
 	@NonNull
 	private String color;
 	
+	@JsonIgnoreProperties
 	@ManyToMany
 	private List<Teacher> teachers;
 	
+	@JsonIgnoreProperties
 	@ManyToMany
 	private List<Classroom> excludedClassrooms;
 	
+	@JsonIgnoreProperties
 	@ManyToOne
 	private Classroom classroom;
 	
+	@JsonIgnoreProperties
 	@ManyToOne
 	private Institution institution;
 

@@ -33,12 +33,15 @@ public class Classroom {
 	@NonNull
 	private String color;
 	
+	@JsonIgnoreProperties
 	@ManyToMany(cascade = CascadeType.REMOVE)
 	private List<Subject> excludedSubjects;
 	
+	@JsonIgnoreProperties
 	@OneToMany(mappedBy = "classroom",cascade = CascadeType.REMOVE)
 	private List<Subject> subjects;
 	
+	@JsonIgnoreProperties
 	@ManyToOne
 	private Institution institution;
 	

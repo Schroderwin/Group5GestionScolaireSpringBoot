@@ -34,6 +34,7 @@ public class GroupClass {
 	@OneToOne(cascade = CascadeType.REMOVE)
 	private Teacher teacher;
 	
+	@JsonIgnoreProperties
 	@ManyToOne
 	private Institution institution;
 

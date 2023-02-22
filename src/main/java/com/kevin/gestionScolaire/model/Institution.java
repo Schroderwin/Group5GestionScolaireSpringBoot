@@ -39,15 +39,19 @@ public class Institution {
 	
 	private String logo;
 	
+	@JsonIgnoreProperties
 	@OneToMany(mappedBy = "institution", cascade = CascadeType.REMOVE)
 	private List<Teacher> teachers;
 	
+	@JsonIgnoreProperties
 	@OneToMany(mappedBy = "institution", cascade = CascadeType.REMOVE)
 	private List<GroupClass> groupClasses;
 	
+	@JsonIgnoreProperties
 	@OneToMany(mappedBy = "institution", cascade = CascadeType.REMOVE)
 	private List<Classroom> classrooms;
 	
+	@JsonIgnoreProperties
 	@OneToMany(mappedBy = "institution", cascade = CascadeType.REMOVE)
 	private List<Subject> subjects;
 	

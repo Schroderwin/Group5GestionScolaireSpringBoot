@@ -37,12 +37,14 @@ public class Teacher {
 	@NonNull
 	private String birthDate;
 	
+	@JsonIgnoreProperties
 	@ManyToMany(cascade = CascadeType.REMOVE)
 	private List<Subject> subjects;
 	
 	@OneToOne
 	private GroupClass groupClass;
 	
+	@JsonIgnoreProperties
 	@ManyToOne
 	private Institution institution;
 
