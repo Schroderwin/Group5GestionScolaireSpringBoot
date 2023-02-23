@@ -27,28 +27,10 @@ public class GroupClass {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
 	private String name;
-	
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToOne
 	private Teacher teacher;
-	
 	@ManyToOne
 	private Institution institution;
-
-	public GroupClass(String name, Teacher teacher, Institution institution) {
-		super();
-		this.name = name;
-		this.teacher = teacher;
-		this.institution = institution;
-	}
-
-	public GroupClass(String name, Teacher teacher) {
-		super();
-		this.name = name;
-		this.teacher = teacher;
-	}
-	
-	
 
 }

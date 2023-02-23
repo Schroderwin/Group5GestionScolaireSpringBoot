@@ -1,5 +1,6 @@
 package com.kevin.gestionScolaire.model;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -32,37 +33,17 @@ public class Teacher {
 	
 	private String lastName;
 	
-	private String birthDate;
+	private LocalDate birthDate;
 	
 
 	@JsonIgnoreProperties({"institution","teachers","classroom","excludedClassrooms"})
-	@ManyToMany(cascade = CascadeType.ALL)
+	@ManyToMany
 	private List<Subject> subjects;
 	
-	@OneToOne(mappedBy = "teacher",cascade = CascadeType.ALL)
+	@OneToOne(mappedBy = "teacher")
 	private GroupClass groupClass;
 	
 	@JsonIgnoreProperties({"groupClasses","teachers","classrooms","excludedClassrooms"})
 	@ManyToOne
 	private Institution institution;
-	
-	public Teacher(String firstName, String lastName, String birthDate, List<Subject> subjects, GroupClass groupClass,
-			Institution institution) {
-		super();
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.birthDate = birthDate;
-		this.subjects = subjects;
-		this.groupClass = groupClass;
-		this.institution = institution;
-	}
-	
-	public Teacher(String firstName, String lastName, String birthDate, List<Subject> subjects) {
-		super();
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.birthDate = birthDate;
-		this.subjects = subjects;
-	}
-
 }

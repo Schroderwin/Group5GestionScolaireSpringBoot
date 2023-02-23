@@ -23,33 +23,16 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class Institution {
 
-	public Institution(String name, String adresse, Type type, Teacher teacher,
-			GroupClass groupClass, Classroom classroom, Subject subject) {
-		this.name=name;
-		this.adresse=adresse;
-		this.type=type;
-		this.teachers.add(teacher);
-		this.groupClasses.add(groupClass);
-		this.classrooms.add(classroom);
-		this.subjects.add(subject);
-		// TODO Auto-generated constructor stub
-	}
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
 	@NonNull
 	private String name;
-	
 	@NonNull
 	private String adresse;
-	
 	@NonNull
 	private Type type;
-	
 	private String phone;
-	
 	private String logo;
 	
 	@JsonIgnoreProperties({"institution","subjects"})
@@ -67,7 +50,4 @@ public class Institution {
 	@JsonIgnoreProperties({"institution","teachers","classroom","excludedClassrooms"})
 	@OneToMany(mappedBy = "institution", cascade = CascadeType.ALL)
 	private List<Subject> subjects = new ArrayList<>();
-	
-	
-	
 }

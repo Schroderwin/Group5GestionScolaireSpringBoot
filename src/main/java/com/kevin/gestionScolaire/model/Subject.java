@@ -26,41 +26,12 @@ public class Subject {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
 	private String name;
-	
 	private String color;
-	
-	
-	
-	public Subject(String name, String color, List<Teacher> teachers, List<Classroom> excludedClassrooms,
-			Classroom classroom, Institution institution) {
-		super();
-		this.name = name;
-		this.color = color;
-		this.teachers = teachers;
-		this.excludedClassrooms = excludedClassrooms;
-		this.classroom = classroom;
-		this.institution = institution;
-	}
-	
-	public Subject(String name, String color) {
-		super();
-		this.name = name;
-		this.color = color;
-	}
-
-	
-	@ManyToMany(cascade = CascadeType.ALL, mappedBy = "subjects", fetch = FetchType.EAGER)
+	@ManyToMany(mappedBy = "subjects")
 	private List<Teacher> teachers;
-	
-	@ManyToMany(mappedBy = "excludedSubjects", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToMany(mappedBy = "excludedSubjects")
 	private List<Classroom> excludedClassrooms;
-	
 	@ManyToOne
-	private Classroom classroom;
-	
-	@ManyToOne(fetch = FetchType.EAGER)
 	private Institution institution;
-
 }
