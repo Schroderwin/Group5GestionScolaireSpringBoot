@@ -32,7 +32,7 @@ public class Classroom {
 	private int capacity;
 	
 	
-	@ManyToMany
+	@ManyToMany(cascade = CascadeType.ALL)
 	private List<Subject> excludedSubjects;
 	
 	@OneToMany(mappedBy = "classroom",cascade = CascadeType.ALL, fetch = FetchType.EAGER)

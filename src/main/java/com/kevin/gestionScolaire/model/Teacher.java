@@ -36,10 +36,10 @@ public class Teacher {
 	
 
 	@JsonIgnoreProperties({"institution","teachers","classroom","excludedClassrooms"})
-	@ManyToMany
+	@ManyToMany(cascade = CascadeType.ALL)
 	private List<Subject> subjects;
 	
-	@OneToOne(mappedBy = "teacher")
+	@OneToOne(mappedBy = "teacher",cascade = CascadeType.ALL)
 	private GroupClass groupClass;
 	
 	@JsonIgnoreProperties({"groupClasses","teachers","classrooms","excludedClassrooms"})

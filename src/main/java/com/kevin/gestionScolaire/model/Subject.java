@@ -51,7 +51,7 @@ public class Subject {
 	}
 
 	
-	@ManyToMany(mappedBy = "subjects", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToMany(cascade = CascadeType.ALL, mappedBy = "subjects", fetch = FetchType.EAGER)
 	private List<Teacher> teachers;
 	
 	@ManyToMany(mappedBy = "excludedSubjects", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
