@@ -28,10 +28,13 @@ public class Subject {
 	private Long id;
 	private String name;
 	private String color;
-	@ManyToMany(mappedBy = "subjects")
+	@JsonIgnoreProperties({"institution","subjects","classroom","groupClass"})
+	@ManyToMany(mappedBy = "subjects", fetch = FetchType.EAGER)
 	private List<Teacher> teachers;
-	@ManyToMany(mappedBy = "excludedSubjects")
+	@JsonIgnoreProperties({"institution","excludedSubjects"})
+	@ManyToMany(mappedBy = "excludedSubjects", fetch = FetchType.EAGER)
 	private List<Classroom> excludedClassrooms;
-	@ManyToOne
+	@JsonIgnoreProperties({"groupClasses","teachers","classrooms","subjects"})
+	@ManyToOne(fetch = FetchType.EAGER)
 	private Institution institution;
 }
