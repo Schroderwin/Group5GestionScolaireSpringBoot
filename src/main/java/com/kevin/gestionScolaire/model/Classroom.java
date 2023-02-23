@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -20,31 +21,15 @@ import lombok.RequiredArgsConstructor;
 @Entity
 @Data
 @NoArgsConstructor
-@RequiredArgsConstructor
 public class Classroom {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
-	@NonNull
 	private String name;
-	
-	@NonNull
-	private String color;
-	
-	@JsonIgnoreProperties
-	@ManyToMany(cascade = CascadeType.REMOVE)
+	private int capacity;
+	@ManyToMany
 	private List<Subject> excludedSubjects;
-	
-	@JsonIgnoreProperties
-	@OneToMany(mappedBy = "classroom",cascade = CascadeType.REMOVE)
-	private List<Subject> subjects;
-	
-	@JsonIgnoreProperties
 	@ManyToOne
 	private Institution institution;
-	
-	
-
 }

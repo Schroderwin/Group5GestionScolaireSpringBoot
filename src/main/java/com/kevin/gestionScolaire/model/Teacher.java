@@ -1,11 +1,13 @@
 package com.kevin.gestionScolaire.model;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -21,31 +23,27 @@ import lombok.RequiredArgsConstructor;
 @Entity
 @Data
 @NoArgsConstructor
-@RequiredArgsConstructor
 public class Teacher {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@NonNull
 	private String firstName;
 	
-	@NonNull
 	private String lastName;
 	
-	@NonNull
-	private String birthDate;
+	private LocalDate birthDate;
 	
-	@JsonIgnoreProperties
-	@ManyToMany(cascade = CascadeType.REMOVE)
+
+	@JsonIgnoreProperties({"institution","teachers","classroom","excludedClassrooms"})
+	@ManyToMany
 	private List<Subject> subjects;
 	
-	@OneToOne
+	@OneToOne(mappedBy = "teacher")
 	private GroupClass groupClass;
 	
-	@JsonIgnoreProperties
+	@JsonIgnoreProperties({"groupClasses","teachers","classrooms","excludedClassrooms"})
 	@ManyToOne
 	private Institution institution;
-
 }

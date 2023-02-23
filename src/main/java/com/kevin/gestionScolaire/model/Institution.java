@@ -1,5 +1,6 @@
 package com.kevin.gestionScolaire.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -25,36 +26,28 @@ public class Institution {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
 	@NonNull
 	private String name;
-	
 	@NonNull
 	private String adresse;
-	
 	@NonNull
 	private Type type;
-	
 	private String phone;
-	
 	private String logo;
 	
-	@JsonIgnoreProperties
-	@OneToMany(mappedBy = "institution", cascade = CascadeType.REMOVE)
-	private List<Teacher> teachers;
+	@JsonIgnoreProperties({"institution","subjects"})
+	@OneToMany(mappedBy = "institution", cascade = CascadeType.ALL)
+	private List<Teacher> teachers = new ArrayList<>();
 	
-	@JsonIgnoreProperties
-	@OneToMany(mappedBy = "institution", cascade = CascadeType.REMOVE)
-	private List<GroupClass> groupClasses;
+	@JsonIgnoreProperties({"institution","teacher"})
+	@OneToMany(mappedBy = "institution", cascade = CascadeType.ALL)
+	private List<GroupClass> groupClasses = new ArrayList<>();
 	
-	@JsonIgnoreProperties
-	@OneToMany(mappedBy = "institution", cascade = CascadeType.REMOVE)
-	private List<Classroom> classrooms;
+	@JsonIgnoreProperties({"institution","subjects","excludedSubjects"})
+	@OneToMany(mappedBy = "institution", cascade = CascadeType.ALL)
+	private List<Classroom> classrooms = new ArrayList<>();
 	
-	@JsonIgnoreProperties
-	@OneToMany(mappedBy = "institution", cascade = CascadeType.REMOVE)
-	private List<Subject> subjects;
-	
-	
-	
+	@JsonIgnoreProperties({"institution","teachers","classroom","excludedClassrooms"})
+	@OneToMany(mappedBy = "institution", cascade = CascadeType.ALL)
+	private List<Subject> subjects = new ArrayList<>();
 }
