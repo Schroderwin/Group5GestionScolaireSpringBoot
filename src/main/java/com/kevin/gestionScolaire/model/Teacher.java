@@ -35,16 +35,15 @@ public class Teacher {
 	private String birthDate;
 	
 
-	@JsonIgnoreProperties
-	@ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+	@JsonIgnoreProperties({"institution","teachers","classroom","excludedClassrooms"})
+	@ManyToMany
 	private List<Subject> subjects;
 	
-	@JsonIgnoreProperties
-	@OneToOne
+	@OneToOne(mappedBy = "teacher")
 	private GroupClass groupClass;
 	
-	@JsonIgnoreProperties
-	@ManyToOne(fetch = FetchType.EAGER)
+	@JsonIgnoreProperties({"groupClasses","teachers","classrooms","excludedClassrooms"})
+	@ManyToOne
 	private Institution institution;
 	
 	public Teacher(String firstName, String lastName, String birthDate, List<Subject> subjects, GroupClass groupClass,

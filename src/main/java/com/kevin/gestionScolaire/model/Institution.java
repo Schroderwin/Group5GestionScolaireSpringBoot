@@ -1,5 +1,6 @@
 package com.kevin.gestionScolaire.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -22,15 +23,15 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class Institution {
 
-	public Institution(String name, String adresse, Type type, List<Teacher> teachers,
-			List<GroupClass> groupClasses, List<Classroom> classrooms, List<Subject> subjects) {
+	public Institution(String name, String adresse, Type type, Teacher teacher,
+			GroupClass groupClass, Classroom classroom, Subject subject) {
 		this.name=name;
 		this.adresse=adresse;
 		this.type=type;
-		this.teachers=teachers;
-		this.groupClasses=groupClasses;
-		this.classrooms=classrooms;
-		this.subjects=subjects;
+		this.teachers.add(teacher);
+		this.groupClasses.add(groupClass);
+		this.classrooms.add(classroom);
+		this.subjects.add(subject);
 		// TODO Auto-generated constructor stub
 	}
 
@@ -51,21 +52,21 @@ public class Institution {
 	
 	private String logo;
 	
-	@JsonIgnoreProperties
+	@JsonIgnoreProperties({"institution","subjects"})
 	@OneToMany(mappedBy = "institution", cascade = CascadeType.ALL)
-	private List<Teacher> teachers;
+	private List<Teacher> teachers = new ArrayList<>();
 	
-	@JsonIgnoreProperties
+	@JsonIgnoreProperties({"institution","teacher"})
 	@OneToMany(mappedBy = "institution", cascade = CascadeType.ALL)
-	private List<GroupClass> groupClasses;
+	private List<GroupClass> groupClasses = new ArrayList<>();
 	
-	@JsonIgnoreProperties
+	@JsonIgnoreProperties({"institution","subjects","excludedSubjects"})
 	@OneToMany(mappedBy = "institution", cascade = CascadeType.ALL)
-	private List<Classroom> classrooms;
+	private List<Classroom> classrooms = new ArrayList<>();
 	
-	@JsonIgnoreProperties
+	@JsonIgnoreProperties({"institution","teachers","classroom","excludedClassrooms"})
 	@OneToMany(mappedBy = "institution", cascade = CascadeType.ALL)
-	private List<Subject> subjects;
+	private List<Subject> subjects = new ArrayList<>();
 	
 	
 	

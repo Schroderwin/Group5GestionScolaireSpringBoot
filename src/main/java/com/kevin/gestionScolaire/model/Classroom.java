@@ -32,15 +32,12 @@ public class Classroom {
 	private int capacity;
 	
 	
-	@JsonIgnoreProperties
-	@ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+	@ManyToMany
 	private List<Subject> excludedSubjects;
 	
-	@JsonIgnoreProperties
-	@OneToMany(mappedBy = "classroom",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "classroom",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<Subject> subjects;
 	
-	@JsonIgnoreProperties
 	@ManyToOne(fetch = FetchType.EAGER)
 	private Institution institution;
 

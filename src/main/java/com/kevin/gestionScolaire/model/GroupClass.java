@@ -30,12 +30,10 @@ public class GroupClass {
 	
 	private String name;
 	
-	@JsonIgnoreProperties
-	@OneToOne(cascade = CascadeType.REMOVE)
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Teacher teacher;
 	
-	@JsonIgnoreProperties
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne
 	private Institution institution;
 
 	public GroupClass(String name, Teacher teacher, Institution institution) {

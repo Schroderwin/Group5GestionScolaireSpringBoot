@@ -27,23 +27,34 @@ public class InstitutionController {
 
 	@Autowired
 	InstitutionDao dao;
+	
+	@Autowired
+	ClassroomDao classdao;
+	
+	@Autowired
+	GroupClassDao groupdao;
+	
+	@Autowired
+	SubjectDao subjectdao;
+	
+	@Autowired
+	TeacherDao teacherdao;
 
 	@GetMapping({"/home","", "/" })
 	public ResponseEntity<List<Institution>> findAll(@RequestParam(defaultValue = "0") int init) {
 		if (init == 1) {
 			Subject subject = new Subject("Mathématique","bg-primary");
+			//Subject subject = subjectdao.save(new Subject("Mathématique","bg-primary"));
 			Classroom classroom = new Classroom("A1",40);
+			//Classroom classroom = classdao.save(new Classroom("A1",40));
 			List<Subject> subjects = new ArrayList<Subject>();
 			subjects.add(subject);
 			Teacher teacher = new Teacher("Bobby","Bob","01-06-1997",subjects);
+			//Teacher teacher = teacherdao.save(new Teacher("Bobby","Bob","01-06-1997",subjects));
 			GroupClass groupClass = new GroupClass("3E",teacher);
-			List<Teacher> teachers = new ArrayList<Teacher>();
-			teachers.add(teacher);
-			List<GroupClass> groupClasses = new ArrayList<GroupClass>();
-			groupClasses.add(groupClass);
-			List<Classroom> classrooms = new ArrayList<Classroom>();
-			classrooms.add(classroom);
-			this.dao.save(new Institution("College 1", "rue du pif", Type.COLLEGE,teachers,groupClasses,classrooms,subjects));
+			//GroupClass groupClass = groupdao.save(new GroupClass("3E",teacher));
+			Institution institution = new Institution("College 1", "rue du pif", Type.COLLEGE,new Teacher("Bobby","Bob","01-06-1997",subjects),new GroupClass("3E",teacher),classroom,subject);
+			this.dao.save(institution);
 		}
 		return new ResponseEntity<List<Institution>>(dao.findAll(), HttpStatus.OK);
 	}

@@ -50,19 +50,16 @@ public class Subject {
 		this.color = color;
 	}
 
-	@JsonIgnoreProperties
-	@ManyToMany(fetch = FetchType.EAGER)
+	
+	@ManyToMany(mappedBy = "subjects", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<Teacher> teachers;
 	
-	@JsonIgnoreProperties
-	@ManyToMany(fetch = FetchType.EAGER)
+	@ManyToMany(mappedBy = "excludedSubjects", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<Classroom> excludedClassrooms;
 	
-	@JsonIgnoreProperties
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne
 	private Classroom classroom;
 	
-	@JsonIgnoreProperties
 	@ManyToOne(fetch = FetchType.EAGER)
 	private Institution institution;
 
