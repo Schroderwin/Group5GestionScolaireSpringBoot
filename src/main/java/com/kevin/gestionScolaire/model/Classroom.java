@@ -28,8 +28,8 @@ public class Classroom {
 	private Long id;
 	private String name;
 	private int capacity;
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER)
 	private List<Subject> excludedSubjects;
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	private Institution institution;
 }

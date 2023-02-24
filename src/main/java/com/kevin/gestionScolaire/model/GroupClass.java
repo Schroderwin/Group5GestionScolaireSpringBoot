@@ -28,7 +28,7 @@ public class GroupClass {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String name;
-	@OneToOne
+	@OneToOne(fetch = FetchType.EAGER)
 	private Teacher teacher;
 	@ManyToOne
 	private Institution institution;

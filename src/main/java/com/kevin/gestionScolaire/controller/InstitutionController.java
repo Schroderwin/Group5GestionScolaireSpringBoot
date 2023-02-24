@@ -54,17 +54,17 @@ public class InstitutionController {
 
 			Subject subject1 = new Subject();
 			subject1.setName("EPS");
-			subject1.setColor("Vert");
+			subject1.setColor("Green");
 			subject1.setInstitution(institution);
 
 			Subject subject2 = new Subject();
 			subject2.setName("Espagnol");
-			subject2.setColor("Jaune");
+			subject2.setColor("Yellow");
 			subject2.setInstitution(institution);
 
 			Subject subject3 = new Subject();
 			subject3.setName("Physique-Chimie");
-			subject3.setColor("Bleu");
+			subject3.setColor("Blue");
 			subject3.setInstitution(institution);
 
 			Subject subject4 = new Subject();
@@ -123,17 +123,17 @@ public class InstitutionController {
 
 			Subject subject12 = new Subject();
 			subject12.setName("Histoire");
-			subject12.setColor("Marron");
+			subject12.setColor("Brown");
 			subject12.setInstitution(institution2);
 
 			Subject subject22 = new Subject();
 			subject22.setName("Français");
-			subject22.setColor("Jaune");
+			subject22.setColor("Yellow");
 			subject22.setInstitution(institution2);
 
 			Subject subject32 = new Subject();
 			subject32.setName("Anglais");
-			subject32.setColor("Bleu");
+			subject32.setColor("Blue");
 			subject32.setInstitution(institution2);
 
 			Subject subject42 = new Subject();

@@ -21,13 +21,13 @@ import com.kevin.gestionScolaire.model.*;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/gestionscolaire/institution/{id_institution}/classroom")
+@RequestMapping("/gestionscolaire")
 public class ClassroomController {
 
 	@Autowired
 	ClassroomDao dao;
 
-	@GetMapping({ "", "/" })
+	@GetMapping({ "/institution/{id_institution}/classroom", "/institution/{id_institution}/classroom/" })
 	public ResponseEntity<List<Classroom>> findAllByInstitutionId(@RequestParam(defaultValue = "0") int init,
 			@PathVariable long id_institution) {
 		if (init == 1) {
@@ -36,7 +36,7 @@ public class ClassroomController {
 	}
 
 	
-	@GetMapping("/{id}")
+	@GetMapping("/classroom/{id}")
 	public ResponseEntity<Classroom> findOne(@PathVariable long id) {
 		Optional<Classroom> optClassroom = dao.findById(id);
 
@@ -44,14 +44,14 @@ public class ClassroomController {
 				: new ResponseEntity<Classroom>(HttpStatus.NOT_FOUND);
 	}
 	
-	@DeleteMapping("/{id}")
+	@DeleteMapping("/classroom/{id}")
 	public ResponseEntity<Void> deleteOne(@PathVariable long id){
 		this.dao.deleteById(id);
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 
 	
-	@PostMapping({ "", "/" })
+	@PostMapping({ "/classroom", "/classroom/" })
 	public ResponseEntity<Classroom> addOne(@RequestBody Classroom classroom) {
 		this.dao.save(classroom);
 		return new ResponseEntity<Classroom>(classroom,HttpStatus.CREATED);

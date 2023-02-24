@@ -37,10 +37,11 @@ public class Teacher {
 	
 
 	@JsonIgnoreProperties({"institution","teachers","classroom","excludedClassrooms"})
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER)
 	private List<Subject> subjects;
 	
-	@OneToOne(mappedBy = "teacher")
+	@JsonIgnoreProperties({"teacher","institution"})
+	@OneToOne(mappedBy = "teacher",fetch = FetchType.EAGER)
 	private GroupClass groupClass;
 	
 	@JsonIgnoreProperties({"groupClasses","teachers","classrooms","excludedClassrooms"})
