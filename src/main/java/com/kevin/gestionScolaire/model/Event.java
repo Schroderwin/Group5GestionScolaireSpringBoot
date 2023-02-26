@@ -1,5 +1,8 @@
 package com.kevin.gestionScolaire.model;
 
+import java.sql.Time;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -13,7 +16,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
@@ -22,19 +24,17 @@ import lombok.RequiredArgsConstructor;
 @Entity
 @Data
 @NoArgsConstructor
-public class GroupClass {
+public class Event {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String name;
-	@OneToOne(fetch = FetchType.EAGER)
-	private Teacher teacher;
-	@ManyToOne
-	private Institution institution;
+	private LocalDate date;
+	private LocalTime beginTime;
+	private LocalTime endTime;
 	
-	@JsonIgnoreProperties("groupClass")
-	@OneToMany( mappedBy = "groupClass")
-	private List<Event> events;
-
+	@JsonIgnoreProperties({"events","institution","teacher"})
+	@ManyToOne(fetch = FetchType.EAGER)
+	private GroupClass groupClass;
 }
