@@ -35,6 +35,6 @@ public class GroupClass {
 	
 	@JsonIgnoreProperties("groupClass")
 	@OneToMany( mappedBy = "groupClass")
-	private List<Event> events;
+	private List<ScheduleEvent> events;
 
 }

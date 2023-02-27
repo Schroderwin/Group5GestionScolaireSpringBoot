@@ -22,26 +22,26 @@ import com.kevin.gestionScolaire.model.*;
 @CrossOrigin
 @RestController
 @RequestMapping("/gestionscolaire")
-public class EventController {
+public class ScheduleEventController {
 
 	@Autowired
-	EventDao dao;
+	ScheduleEventDao dao;
 
 	@GetMapping({ "/groupclass/{id_groupclass}/event", "/groupclass/{id_groupclass}/event" })
-	public ResponseEntity<List<Event>> findAllByGroupClassId(@RequestParam(defaultValue = "0") int init,
+	public ResponseEntity<List<ScheduleEvent>> findAllByGroupClassId(@RequestParam(defaultValue = "0") int init,
 			@PathVariable long id_groupclass) {
 		if (init == 1) {
 		}
-		return new ResponseEntity<List<Event>>(dao.findAllByGroupClassId(id_groupclass), HttpStatus.OK);
+		return new ResponseEntity<List<ScheduleEvent>>(dao.findAllByGroupClassId(id_groupclass), HttpStatus.OK);
 	}
 
 	
 	@GetMapping("/event/{id}")
-	public ResponseEntity<Event> findOne(@PathVariable long id) {
-		Optional<Event> optEvent = dao.findById(id);
+	public ResponseEntity<ScheduleEvent> findOne(@PathVariable long id) {
+		Optional<ScheduleEvent> optEvent = dao.findById(id);
 
-		return optEvent.isPresent() ? new ResponseEntity<Event>(optEvent.get(), HttpStatus.OK)
-				: new ResponseEntity<Event>(HttpStatus.NOT_FOUND);
+		return optEvent.isPresent() ? new ResponseEntity<ScheduleEvent>(optEvent.get(), HttpStatus.OK)
+				: new ResponseEntity<ScheduleEvent>(HttpStatus.NOT_FOUND);
 	}
 	
 	@DeleteMapping("/event/{id}")
@@ -52,8 +52,8 @@ public class EventController {
 
 	
 	@PostMapping({ "/event", "/event/" })
-	public ResponseEntity<Event> addOne(@RequestBody Event event) {
+	public ResponseEntity<ScheduleEvent> addOne(@RequestBody ScheduleEvent event) {
 		this.dao.save(event);
-		return new ResponseEntity<Event>(event,HttpStatus.CREATED);
+		return new ResponseEntity<ScheduleEvent>(event,HttpStatus.CREATED);
 	}
 }

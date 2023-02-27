@@ -30,6 +30,8 @@ public class Classroom {
 	private int capacity;
 	@ManyToMany(fetch = FetchType.EAGER)
 	private List<Subject> excludedSubjects;
+	@OneToMany(mappedBy = "classroom",fetch = FetchType.EAGER)
+	private List<ScheduleEvent> events;
 	@ManyToOne(fetch = FetchType.EAGER)
 	private Institution institution;
 }

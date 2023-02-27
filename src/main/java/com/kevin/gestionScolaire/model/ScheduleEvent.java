@@ -24,12 +24,11 @@ import lombok.RequiredArgsConstructor;
 @Entity
 @Data
 @NoArgsConstructor
-public class Event {
+public class ScheduleEvent {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private String name;
 	private LocalDate date;
 	private LocalTime beginTime;
 	private LocalTime endTime;
@@ -40,6 +39,10 @@ public class Event {
 	@JsonIgnoreProperties({"teachers","institution","excludedClassrooms"})
 	@ManyToOne(fetch = FetchType.EAGER)
 	private Subject subject;
+	
+	@JsonIgnoreProperties({"excludedSubjects","events","institution"})
+	@ManyToOne(fetch = FetchType.EAGER)
+	private Classroom classroom;
 	
 	@JsonIgnoreProperties({"events","institution","teacher"})
 	@ManyToOne(fetch = FetchType.EAGER)

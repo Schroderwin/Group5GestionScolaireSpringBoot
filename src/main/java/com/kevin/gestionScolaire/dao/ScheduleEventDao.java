@@ -7,8 +7,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.kevin.gestionScolaire.model.*;
 
 
-public interface EventDao extends JpaRepository<Event, Long> {
+public interface ScheduleEventDao extends JpaRepository<ScheduleEvent, Long> {
 	
-	public List<Event> findAllByGroupClassId(long id);
+	public List<ScheduleEvent> findAllByGroupClassId(long id);
 
 }
