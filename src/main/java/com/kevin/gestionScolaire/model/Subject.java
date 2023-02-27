@@ -28,13 +28,13 @@ public class Subject {
 	private Long id;
 	private String name;
 	private String color;
-	@JsonIgnoreProperties({"institution","subjects","classroom","groupClass"})
+	@JsonIgnoreProperties({"institution","subjects","classroom","groupClass","events"})
 	@ManyToMany(mappedBy = "subjects", fetch = FetchType.EAGER)
 	private List<Teacher> teachers;
-	@JsonIgnoreProperties({"institution","excludedSubjects"})
+	@JsonIgnoreProperties({"institution","excludedSubjects","events"})
 	@ManyToMany(mappedBy = "excludedSubjects", fetch = FetchType.EAGER)
 	private List<Classroom> excludedClassrooms;
-	@JsonIgnoreProperties({"teacher","subject","groupClass"})
+	@JsonIgnoreProperties({"teacher","subject","groupClass","events"})
 	@OneToMany(mappedBy = "subject",fetch = FetchType.EAGER)
 	private List<ScheduleEvent> events;
 	@JsonIgnoreProperties({"groupClasses","teachers","classrooms","subjects"})

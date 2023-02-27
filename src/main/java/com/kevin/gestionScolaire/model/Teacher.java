@@ -36,19 +36,19 @@ public class Teacher {
 	private LocalDate birthDate;
 	
 
-	@JsonIgnoreProperties({"institution","teachers","classroom","excludedClassrooms"})
+	@JsonIgnoreProperties({"institution","teachers","classroom","excludedClassrooms","events"})
 	@ManyToMany(fetch = FetchType.EAGER)
 	private List<Subject> subjects;
 	
-	@JsonIgnoreProperties({"teacher","institution"})
+	@JsonIgnoreProperties({"teacher","institution","events"})
 	@OneToOne(mappedBy = "teacher",fetch = FetchType.EAGER)
 	private GroupClass groupClass;
 	
-	@JsonIgnoreProperties({"teacher","subject","groupClass"})
-	@OneToMany(mappedBy = "teacher",fetch = FetchType.EAGER)
+	@JsonIgnoreProperties({"teacher","subject","groupClass","classroom"})
+	@OneToMany(mappedBy = "teacher")
 	private List<ScheduleEvent> events;
 	
 	@JsonIgnoreProperties({"groupClasses","teachers","classrooms","excludedClassrooms"})
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	private Institution institution;
 }

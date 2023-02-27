@@ -35,19 +35,19 @@ public class Institution {
 	private String phone;
 	private String logo;
 	
-	@JsonIgnoreProperties({"institution","subjects"})
+	@JsonIgnoreProperties({"institution","subjects","groupClass","events"})
 	@OneToMany(mappedBy = "institution", cascade = CascadeType.ALL)
 	private List<Teacher> teachers = new ArrayList<>();
 	
-	@JsonIgnoreProperties({"institution","teacher"})
+	@JsonIgnoreProperties({"institution","teacher","events"})
 	@OneToMany(mappedBy = "institution", cascade = CascadeType.ALL)
 	private List<GroupClass> groupClasses = new ArrayList<>();
 	
-	@JsonIgnoreProperties({"institution","subjects","excludedSubjects"})
+	@JsonIgnoreProperties({"institution","excludedSubjects","events"})
 	@OneToMany(mappedBy = "institution", cascade = CascadeType.ALL)
 	private List<Classroom> classrooms = new ArrayList<>();
 	
-	@JsonIgnoreProperties({"institution","teachers","classroom","excludedClassrooms"})
+	@JsonIgnoreProperties({"institution","teachers","excludedClassrooms","events"})
 	@OneToMany(mappedBy = "institution", cascade = CascadeType.ALL)
 	private List<Subject> subjects = new ArrayList<>();
 }

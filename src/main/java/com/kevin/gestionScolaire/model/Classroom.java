@@ -28,10 +28,15 @@ public class Classroom {
 	private Long id;
 	private String name;
 	private int capacity;
+	@JsonIgnoreProperties({"institution","teachers","classroom","excludedClassrooms","events"})
 	@ManyToMany(fetch = FetchType.EAGER)
 	private List<Subject> excludedSubjects;
+	
+	@JsonIgnoreProperties({"teacher","subject","groupClass","classroom"})
 	@OneToMany(mappedBy = "classroom",fetch = FetchType.EAGER)
 	private List<ScheduleEvent> events;
+	
+	@JsonIgnoreProperties({"groupClasses","teachers","classrooms","excludedClassrooms"})
 	@ManyToOne(fetch = FetchType.EAGER)
 	private Institution institution;
 }

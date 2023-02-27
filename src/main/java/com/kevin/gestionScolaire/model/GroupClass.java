@@ -28,12 +28,14 @@ public class GroupClass {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String name;
+	@JsonIgnoreProperties({"institution","subjects","groupClass","events"})
 	@OneToOne(fetch = FetchType.EAGER)
 	private Teacher teacher;
+	@JsonIgnoreProperties({"groupClasses","teachers","classrooms","subjects"})
 	@ManyToOne
 	private Institution institution;
 	
-	@JsonIgnoreProperties("groupClass")
+	@JsonIgnoreProperties({"teacher","subject","groupClass","classroom"})
 	@OneToMany( mappedBy = "groupClass")
 	private List<ScheduleEvent> events;
 

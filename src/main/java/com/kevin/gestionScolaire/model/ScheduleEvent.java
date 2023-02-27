@@ -33,7 +33,7 @@ public class ScheduleEvent {
 	private LocalTime beginTime;
 	private LocalTime endTime;
 	
-	@JsonIgnoreProperties({"subjects","groupClass","institution"})
+	@JsonIgnoreProperties({"subjects","groupClass","institution","events"})
 	@ManyToOne(fetch = FetchType.EAGER)
 	private Teacher teacher;
 	@JsonIgnoreProperties({"teachers","institution","excludedClassrooms"})
