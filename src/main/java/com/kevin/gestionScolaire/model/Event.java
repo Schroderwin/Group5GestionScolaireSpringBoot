@@ -34,6 +34,13 @@ public class Event {
 	private LocalTime beginTime;
 	private LocalTime endTime;
 	
+	@JsonIgnoreProperties({"subjects","groupClass","institution"})
+	@ManyToOne(fetch = FetchType.EAGER)
+	private Teacher teacher;
+	@JsonIgnoreProperties({"teachers","institution","excludedClassrooms"})
+	@ManyToOne(fetch = FetchType.EAGER)
+	private Subject subject;
+	
 	@JsonIgnoreProperties({"events","institution","teacher"})
 	@ManyToOne(fetch = FetchType.EAGER)
 	private GroupClass groupClass;

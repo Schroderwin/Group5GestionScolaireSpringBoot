@@ -44,6 +44,10 @@ public class Teacher {
 	@OneToOne(mappedBy = "teacher",fetch = FetchType.EAGER)
 	private GroupClass groupClass;
 	
+	@JsonIgnoreProperties({"teacher","subject","groupClass"})
+	@OneToMany(mappedBy = "teacher",fetch = FetchType.EAGER)
+	private List<Event> events;
+	
 	@JsonIgnoreProperties({"groupClasses","teachers","classrooms","excludedClassrooms"})
 	@ManyToOne
 	private Institution institution;

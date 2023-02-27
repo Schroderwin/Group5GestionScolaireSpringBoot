@@ -34,6 +34,9 @@ public class Subject {
 	@JsonIgnoreProperties({"institution","excludedSubjects"})
 	@ManyToMany(mappedBy = "excludedSubjects", fetch = FetchType.EAGER)
 	private List<Classroom> excludedClassrooms;
+	@JsonIgnoreProperties({"teacher","subject","groupClass"})
+	@OneToMany(mappedBy = "subject",fetch = FetchType.EAGER)
+	private List<Event> events;
 	@JsonIgnoreProperties({"groupClasses","teachers","classrooms","subjects"})
 	@ManyToOne(fetch = FetchType.EAGER)
 	private Institution institution;
